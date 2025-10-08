@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2024 at 01:48 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Oct 08, 2025 at 03:23 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -112,6 +112,31 @@ INSERT INTO `tblinvoice` (`id`, `Userid`, `ServiceId`, `BillingId`, `PostingDate
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblorders`
+--
+
+CREATE TABLE `tblorders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `status` enum('pending','processing','completed','cancelled') DEFAULT 'pending',
+  `total` decimal(10,2) NOT NULL,
+  `payment_method` varchar(50) DEFAULT NULL,
+  `shipping_address` text DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblorders`
+--
+
+INSERT INTO `tblorders` (`id`, `user_id`, `status`, `total`, `payment_method`, `shipping_address`, `created_at`, `updated_at`) VALUES
+(2, 3, 'pending', 379000.00, 'COD', 'Hà Nội', '2025-10-08 19:59:11', '2025-10-08 19:59:11'),
+(3, 3, 'pending', 3272000.00, 'COD', 'Thái Bình', '2025-10-08 20:06:29', '2025-10-08 20:06:29');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblpage`
 --
 
@@ -133,6 +158,36 @@ CREATE TABLE `tblpage` (
 INSERT INTO `tblpage` (`ID`, `PageType`, `PageTitle`, `PageDescription`, `Email`, `MobileNumber`, `UpdationDate`, `Timing`) VALUES
 (1, 'aboutus', 'About Us', '        Our main focus is on quality and hygiene. Our Parlour is well equipped with advanced technology equipments and provides best quality services. Our staff is well trained and experienced, offering advanced services in Skin, Hair and Body Shaping that will provide you with a luxurious experience that leave you feeling relaxed and stress free. The specialities in the parlour are, apart from regular bleachings and Facials, many types of hairstyles, Bridal and cine make-up and different types of Facials &amp; fashion hair colourings.', NULL, NULL, NULL, ''),
 (2, 'contactus', 'Contact Us', '890,Sector 62, Gyan Sarovar, GAIL Noida(Delhi/NCR)', 'info@gmail.com', 7896541236, NULL, '10:30 am to 7:30 pm');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblproduct`
+--
+
+CREATE TABLE `tblproduct` (
+  `p_id` int(11) NOT NULL,
+  `title` varchar(222) NOT NULL,
+  `slogan` varchar(222) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `img` varchar(222) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tblproduct`
+--
+
+INSERT INTO `tblproduct` (`p_id`, `title`, `slogan`, `price`, `img`) VALUES
+(1, 'Hada Labo Moisturizing Cream', 'Deep hydration for soft, smooth skin all day long', 259000.00, 'hada_labo.jpg'),
+(2, 'CeraVe Facial Cleanser', 'Gently cleanses without drying out the skin', 329000.00, 'cerave_cleanser.jpg'),
+(3, 'Simple Soothing Toner', 'Balances pH and calms sensitive skin', 189000.00, 'simple_toner.jpg'),
+(4, 'Anessa Sunscreen', 'Superior UV protection and excellent water resistance', 499000.00, 'anessa_sunscreen.jpg'),
+(5, 'Melano CC Vitamin C Serum', 'Brightens skin and reduces dark spots effectively', 379000.00, 'melano_cc.jpg'),
+(6, '3CE Velvet Lip Tint', 'Matte texture with rich, long-lasting color', 295000.00, '3ce_velvet.jpg'),
+(7, 'Laneige Neo Cushion Foundation', 'Smooth coverage and effective oil control', 720000.00, 'laneige_cushion.jpg'),
+(8, 'Innisfree Sheet Mask', 'Natural extracts for instant hydration', 29000.00, 'innisfree_mask.jpg'),
+(9, 'Clinique Moisture Surge Cream', 'Instant hydration for plump and glowing skin', 990000.00, 'clinique_moisture.jpg'),
+(10, 'Bioderma Sensibio H2O Micellar Water', 'Deep cleansing and gentle for sensitive skin', 425000.00, 'bioderma_h2o.jpg');
 
 -- --------------------------------------------------------
 
@@ -189,7 +244,54 @@ CREATE TABLE `tbluser` (
 --
 
 INSERT INTO `tbluser` (`ID`, `FirstName`, `LastName`, `MobileNumber`, `Email`, `Password`, `RegDate`) VALUES
-(1, 'John', 'Doe', 1414253612, 'johndoe12@gmail.com', 'f925916e2754e5e03f75dd58a5733251', '2024-09-05 06:46:36');
+(1, 'John', 'Doe', 1414253612, 'johndoe12@gmail.com', 'f925916e2754e5e03f75dd58a5733251', '2024-09-05 06:46:36'),
+(2, 'Nguyen Minh ', 'Chau NMhihi', 812841590, 'bangcac24@gmail.com', '5140d53506b31e78ee7ced0ac35f3905', '2025-10-08 07:09:33'),
+(3, 'BuiNhiCUTE', 'NHinhinhinhi', 987654325, 'nguyenminhchau09012003@gmail.com', '5140d53506b31e78ee7ced0ac35f3905', '2025-10-08 12:38:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_cart`
+--
+
+CREATE TABLE `tbl_cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `session_id` varchar(128) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `unit_price` decimal(10,2) NOT NULL,
+  `meta` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`meta`)),
+  `status` enum('active','ordered','cancelled') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order_details`
+--
+
+CREATE TABLE `tbl_order_details` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL,
+  `total_price` decimal(10,2) GENERATED ALWAYS AS (`quantity` * `unit_price`) STORED,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_order_details`
+--
+
+INSERT INTO `tbl_order_details` (`id`, `order_id`, `product_id`, `quantity`, `unit_price`, `created_at`, `updated_at`) VALUES
+(1, 2, 5, 1, 379000.00, '2025-10-08 19:59:11', '2025-10-08 19:59:11'),
+(2, 3, 1, 3, 259000.00, '2025-10-08 20:06:29', '2025-10-08 20:06:29'),
+(3, 3, 4, 5, 499000.00, '2025-10-08 20:06:29', '2025-10-08 20:06:29');
 
 --
 -- Indexes for dumped tables
@@ -221,10 +323,23 @@ ALTER TABLE `tblinvoice`
   ADD KEY `id` (`id`);
 
 --
+-- Indexes for table `tblorders`
+--
+ALTER TABLE `tblorders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `tblpage`
 --
 ALTER TABLE `tblpage`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `tblproduct`
+--
+ALTER TABLE `tblproduct`
+  ADD PRIMARY KEY (`p_id`);
 
 --
 -- Indexes for table `tblservices`
@@ -238,6 +353,23 @@ ALTER TABLE `tblservices`
 ALTER TABLE `tbluser`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `ID` (`ID`);
+
+--
+-- Indexes for table `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`,`product_id`),
+  ADD KEY `session_id` (`session_id`,`product_id`),
+  ADD KEY `fk_cart_product` (`product_id`);
+
+--
+-- Indexes for table `tbl_order_details`
+--
+ALTER TABLE `tbl_order_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -268,10 +400,22 @@ ALTER TABLE `tblinvoice`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `tblorders`
+--
+ALTER TABLE `tblorders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tblpage`
 --
 ALTER TABLE `tblpage`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tblproduct`
+--
+ALTER TABLE `tblproduct`
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tblservices`
@@ -283,7 +427,42 @@ ALTER TABLE `tblservices`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tbl_order_details`
+--
+ALTER TABLE `tbl_order_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tblorders`
+--
+ALTER TABLE `tblorders`
+  ADD CONSTRAINT `tblorders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbluser` (`ID`);
+
+--
+-- Constraints for table `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  ADD CONSTRAINT `fk_cart_product` FOREIGN KEY (`product_id`) REFERENCES `tblproduct` (`p_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tbl_order_details`
+--
+ALTER TABLE `tbl_order_details`
+  ADD CONSTRAINT `tbl_order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `tblorders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tbl_order_details_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `tblproduct` (`p_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
