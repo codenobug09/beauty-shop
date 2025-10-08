@@ -38,6 +38,10 @@
                             <a class="nav-link" href="contact.php"><i class="fa-solid fa-envelope"></i> Contact</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="product.php"><i class="fa-solid fa-envelope"></i>Beauty Product</a>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="featureMenu" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,6 +59,10 @@
                                 <?php } else { ?>
                                     <a class="dropdown-item" href="book-appointment.php"><i
                                             class="fa-solid fa-calendar-check"></i> Book Salon</a>
+                                    <a class="dropdown-item" href="order_success.php"><i
+                                            class="fa-solid fa-calendar-check"></i>Order</a>
+                                    <a class="dropdown-item" href="cart.php"><i
+                                            class="fa fa-cart-plus"></i>Cart</a>
                                     <a class="dropdown-item" href="booking-history.php"><i
                                             class="fa-solid fa-clock-rotate-left"></i> Booking History</a>
                                     <a class="dropdown-item" href="invoice-history.php"><i

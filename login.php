@@ -1,22 +1,28 @@
+
+
 <?php
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
-error_reporting(0);
 
 if (isset($_POST['login'])) {
     $emailcon = $_POST['emailcont'];
-    $password = md5($_POST['password']);
-    $query = mysqli_query($con, "select ID from tbluser where  (Email='$emailcon' || MobileNumber='$emailcon') && Password='$password' ");
-    $ret = mysqli_fetch_array($query);
-    if ($ret > 0) {
-        $_SESSION['bpmsuid'] = $ret['ID'];
-        header('location:index.php');
+    $password = md5($_POST['password']); // ⚠️ Dùng MD5 giống lúc đăng ký
+
+    // Truy vấn kiểm tra user
+    $query = mysqli_query($con, "SELECT ID FROM tbluser WHERE (Email='$emailcon' OR MobileNumber='$emailcon') AND Password='$password'");
+
+    if (mysqli_num_rows($query) > 0) {
+        $row = mysqli_fetch_assoc($query);
+        $_SESSION['bpmsuid'] = $row['ID']; // ✅ Lưu ID user vào session
+        header('location:index.php'); // ✅ Chuyển sang trang chủ
+        exit();
     } else {
         echo "<script>alert('Invalid Details.');</script>";
     }
 }
 ?>
+
 <!doctype html>
 <html lang="en">
 
