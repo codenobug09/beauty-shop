@@ -59,7 +59,7 @@
                                 <?php } else { ?>
                                     <a class="dropdown-item" href="book-appointment.php"><i
                                             class="fa-solid fa-calendar-check"></i> Book Salon</a>
-                                    <a class="dropdown-item" href="order_success.php"><i
+                                    <a class="dropdown-item" href="order.php"><i
                                             class="fa-solid fa-calendar-check"></i>Order</a>
                                     <a class="dropdown-item" href="cart.php"><i
                                             class="fa fa-cart-plus"></i>Cart</a>
