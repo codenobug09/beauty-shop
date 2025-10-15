@@ -1,6 +1,6 @@
   <div class=" sidebar" role="navigation">
             <div class="navbar-collapse">
-        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" style="overflow: auto; max-height: 700px">
           <ul class="nav" id="side-menu">
             <li>
               <a href="dashboard.php"><i class="fa fa-home nav_icon"></i>Dashboard</a>
@@ -80,6 +80,12 @@
             </li>
             <li>
               <a href="search-invoices.php" class="chart-nav"><i class="fa fa-search nav_icon"></i>Search Invoice</a>
+            </li>
+            <li>
+              <a href="add-product.php" class="chart-nav"><i class="fa fa-plus nav_icon"></i>Add Products</a>
+            </li>
+             <li>
+              <a href="manage-orders.php" class="chart-nav"><i class="fa fa-search nav_icon"></i>Orders Management</a>
             </li>
           
 

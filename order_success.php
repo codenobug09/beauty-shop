@@ -82,7 +82,7 @@ while ($row = $res_details->fetch_assoc()) {
         <?php foreach ($items as $item): ?>
             <tr>
                 <td><?php echo htmlspecialchars($item['title']); ?></td>
-                <td><img src="assets/<?php echo htmlspecialchars($item['img']); ?>" width="60" alt=""></td>
+                <td><img src="assets/images/<?php echo htmlspecialchars($item['img']); ?>" width="60" alt=""></td>
                 <td>$<?php echo number_format($item['unit_price'],2); ?></td>
                 <td><?php echo intval($item['quantity']); ?></td>
                 <td>$<?php echo number_format($item['unit_price'] * $item['quantity'],2); ?></td>

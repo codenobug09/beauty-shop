@@ -184,7 +184,7 @@ while ($r = $res->fetch_assoc()) {
                 <?php foreach ($rows as $r): ?>
                     <div class="cart-item d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
-                            <img src="assets/<?php echo htmlspecialchars($r['img']); ?>" alt="">
+                            <img src="assets/images/<?php echo htmlspecialchars($r['img']); ?>" alt="">
                             <div class="ms-3">
                                 <h5><?php echo htmlspecialchars($r['title']); ?></h5>
                                 <div class="price">$<?php echo number_format($r['unit_price'], 2); ?></div>

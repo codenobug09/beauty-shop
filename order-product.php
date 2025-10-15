@@ -121,7 +121,7 @@ $product = mysqli_fetch_assoc($query);
 <body>
 
 <div class="order-container">
-    <img src="assets/<?php echo htmlspecialchars($product['img']); ?>" class="order-img" alt="<?php echo htmlspecialchars($product['title']); ?>">
+    <img src="assets/images/<?php echo htmlspecialchars($product['img']); ?>" class="order-img" alt="<?php echo htmlspecialchars($product['title']); ?>">
     <div class="order-details">
         <h2 class="order-title"><?php echo htmlspecialchars($product['title']); ?></h2>
         <p class="order-slogan"><?php echo htmlspecialchars($product['slogan']); ?></p>

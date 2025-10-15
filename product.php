@@ -88,7 +88,7 @@ include_once 'includes/header.php';
 
                         echo '  <div class="col-xs-12 col-sm-6 col-md-4 food-item">
                                             <div class="food-item-wrap">
-                                                <div class="figure-wrap bg-image" data-image-src="assets/'. $r['img'].'"></div>
+                                                <div class="figure-wrap bg-image" data-image-src="assets/images/'. $r['img'].'"></div>
                                                 <div class="content">
                                                     <h5><a href="dishes.php?res_id=' . $r['p_id'] . '">' . $r['title'] . '</a></h5>
                                                     <div class="product-name">' . $r['slogan'] . '</div>
