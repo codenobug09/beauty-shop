@@ -79,7 +79,6 @@ include_once 'includes/header.php';
             <div class="container">
                 <div class="title text-xs-center m-b-30">
                     <h2>Product</h2>
-                    <p class="lead">Easiest way to order your favourite food among these top 6 dishes</p>
                 </div>
                 <div class="row">
                     <?php
@@ -90,7 +89,7 @@ include_once 'includes/header.php';
                                             <div class="food-item-wrap">
                                                 <div class="figure-wrap bg-image" data-image-src="assets/images/'. $r['img'].'"></div>
                                                 <div class="content">
-                                                    <h5><a href="dishes.php?res_id=' . $r['p_id'] . '">' . $r['title'] . '</a></h5>
+                                                    <h5>' . $r['title'] . '</h5>
                                                     <div class="product-name">' . $r['slogan'] . '</div>
                                                     <div class="price-btn-block"> <span class="price">$' . $r['price'] . '</span> <a href="order-product.php?product_id=' . $r['p_id'] . '" class="btn theme-btn-dash pull-right">Order Now</a> </div>
                                                 </div>
